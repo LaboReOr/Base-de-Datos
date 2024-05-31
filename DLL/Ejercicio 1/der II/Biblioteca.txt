@@ -1,0 +1,51 @@
+create database derIIBiblio;
+use derIIBiblio;
+ 
+create table socio (
+    codigo int,
+    dni int,
+    direccion varchar(45),
+    telefono int,
+    nombre varchar(45),
+    apellido varchar(45),
+    primary key (dni)
+);
+ 
+create table volumen (
+    estado varchar(45),
+    primary key (estado)
+);
+ 
+create table libro (
+    id int,
+    titulo varchar(45),
+    editorial varchar(45),
+    ano_escritura int,
+    autores varchar(45),
+    ano_edicion int,
+    editorial_edicion varchar(45),
+    ikbn varchar(45),
+    volumen_estado varchar(45),
+    primary key (id),
+    foreign key (volumen_estado) references volumen(estado)
+    on update cascade
+    on delete restrict
+);
+ 
+create table Socio_has_volumen (
+    fecha_prestamo date,
+    fecha_devolucion_limite date,
+    fecha_devolucion_real date,
+    Socio_dni int,
+    libro_id int,
+    foreign key (Socio_dni) references socio(dni),
+    foreign key (libro_id) references libro(id)
+    on update cascade
+    on delete restrict
+);
+ 
+insert into volumen values ("Estado 1");
+insert into libro values (10, "asd", "asdhh", 2000, "jorge", 2010, "qsy", "hola", "Estado 1");
+ 
+delete from volumen;
+update volumen set estado = 1;

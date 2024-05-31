@@ -1,0 +1,63 @@
+create database claseddl;
+use claseddl;
+ 
+create table Clientes(
+    Codigo int,
+    Nombre varchar(45),
+    Apellido varchar(45),
+    Direccion varchar(45),
+    DNI int,
+    Telefono int,
+    Celular int,
+    primary key(Codigo)
+);
+ 
+create table Forma_de_pago (
+    Codigo int,
+    Forma_de_pago varchar(45),
+    primary key(Codigo)
+);
+ 
+create table Alojamiento (
+    Codigo int,
+    Nombre varchar(45),
+    Categoria varchar(45),
+    Direccion varchar(45),
+    Telefono int, 
+    Cantidad_de_personas int,
+    Cocina_Cabaña tinyint,
+    Garage_Cabaña tinyint,
+    Parrilla_Cabaña tinyint,
+    Cantidad_de_pisos int,
+    Bar_Restaurant varchar(45),
+    primary key (Codigo)
+);
+ 
+create table Paquetes_de_viajes (
+    Lugar varchar(45),
+    Cantidad_de_dias int,
+    Cantidad_de_noches int,
+    Costo int,
+    Cantidad_de_excursiones int,
+    Viaje_Aereo_Bus_Barco varchar(45),
+    Codigo int,
+    AlojamientosCodigo int,
+    Forma_de_pagoCodigo int,
+    primary key(Codigo),
+    foreign key(AlojamientosCodigo) references Alojamiento(Codigo),
+    foreign key(Forma_de_pagoCodigo) references Forma_de_pago(Codigo)
+    on update cascade
+    on delete restrict
+);
+ 
+create table Reservas (
+    Fecha_de_inicio date,
+    Fecha_de_fin date,
+    Cantidad_de_personas int,
+    Paquetes_de_viajesCodigo int,
+    ClientesCodigo int,
+    foreign key(Paquetes_de_viajesCodigo) references Paquetes_de_viajes(Codigo),
+    foreign key(ClientesCodigo) references Clientes(Codigo)
+    on update cascade
+    on delete restrict
+);

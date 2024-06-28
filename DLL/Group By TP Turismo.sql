@@ -103,7 +103,7 @@ select sum(Costo) from Paquetes_de_viajes group by Lugar;
 select Alojamiento_Codigo, count(*) from Paquetes_ViajeTP group by Alojamiento_Codigo having count(AlojamientosCodigo)>3;
 
 #14
-select Lugar from Paquetes_de_viajes group by Lugar having sum(Lugar) > 100000;
+select Lugar, Costo from Paquetes_de_viajes group by Lugar having sum(Costo) > 100000;
 
 #15
 select Lugar from Paquetes_de_viajes group by Lugar having avg(Lugar) > 25000;
